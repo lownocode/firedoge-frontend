@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { BigNumber, ethers } from "ethers"
-import { useAccount, useBalance, useChainId, useContractRead, configureChains, WagmiConfig, createClient } from "wagmi"
+import { useAccount, useBalance, useChainId, useContractRead, configureChains, WagmiConfig } from "wagmi"
 import { useSnackbar } from "react-simple-snackbar"
 import { useLocation } from "react-router-dom"
 import { useWeb3Modal } from "@web3modal/react"
@@ -15,8 +15,6 @@ import { Fire } from "../assets/icons"
 import { config } from "../data"
 import { AirdropContract, TokenContract } from "../data/contracts"
 import { useAirdropClaim } from "../hooks"
-import { publicProvider } from 'wagmi/providers/public';
-import { createPublicClient, http } from 'viem'
 
 const futureStepsList = [
     {
@@ -44,38 +42,39 @@ const ClaimFetchingStatus = {
     NOT_ELIGIBLE: 3
 }
 
+// export const AirdropOld = () => {
+//     const chains = [arbitrum];
+//     const { provider, webSocketProvider } = configureChains([arbitrum], [w3mProvider({ projectId: config.walletConnectProjectId })])
+//     const wagmiClient = createConfig({
+//         autoConnect: true,
+//         connectors: w3mConnectors({ projectId: config.walletConnectProjectId, version: 1, chains }),
+//         // queryClient: createPublicClient({
+//         //     transport: http(),
+//         //     chain: arbitrum
+//         // }),
+//         provider,
+//         webSocketProvider,
+//     })
+//     const ethereumClient = new EthereumClient(wagmiClient, chains)
+
+
+//     return (
+//         <WagmiConfig config={wagmiClient}>
+//             {/* <AirdropInner /> */}
+//                 <Web3Modal
+//                 projectId={config.walletConnectProjectId}
+//                 ethereumClient={ethereumClient}
+//                 themeMode={"dark"}
+//                 themeVariables={{
+//                     "--w3m-accent-color": "var(--w3m-accent)",
+//                     "--w3m-background-color": "var(--w3m-accent)",
+//                 }}
+//             />
+//         </WagmiConfig>
+//     );
+// }
+
 export const Airdrop = () => {
-    const chains = [arbitrum];
-    const { provider } = configureChains([arbitrum], [w3mProvider({ projectId: config.walletConnectProjectId })])
-    const wagmiClient = createClient({
-        autoConnect: true,
-        connectors: w3mConnectors({ projectId: config.walletConnectProjectId, version: 1, chains }),
-        queryClient: createPublicClient({
-            transport: http(),
-            chain: arbitrum
-        }),
-        provider
-    })
-    const ethereumClient = new EthereumClient(wagmiClient, chains)
-
-
-    return (
-        <WagmiConfig config={wagmiClient}>
-            <AirdropInner />
-                <Web3Modal
-                projectId={config.walletConnectProjectId}
-                ethereumClient={ethereumClient}
-                themeMode={"dark"}
-                themeVariables={{
-                    "--w3m-accent-color": "var(--w3m-accent)",
-                    "--w3m-background-color": "var(--w3m-accent)",
-                }}
-            />
-        </WagmiConfig>
-    );
-}
-
-export const AirdropInner = () => {
     const account = useAccount()
     const location = useLocation()
     const web3Modal = useWeb3Modal()
