@@ -1,0 +1,187 @@
+.placeholder-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.placeholder-subhead {
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.claim-card-container {
+    border-radius: 20px;
+    background: #07070c;
+    padding: 15px;
+    display: inline-block;
+    min-width: 500px;
+    margin-top: 50px;
+}
+
+.claim-card-title {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.claim-card-subtitle {
+    color: var(--text-secondary);
+}
+
+.claim-card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.claim-card-claim-button {
+    background: #3a3da9;
+}
+
+.claim-card-invite-button {
+    background: #3d2280;
+}
+
+.claim-card-buttons div {
+    border-radius: 10px;
+    padding: 6px 10px;
+    flex: 1;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.claim-card-buttons div:hover {
+    transform: scale(1.03);
+}
+
+.claim-card-buttons div:active {
+    transform: scale(.94);
+}
+
+.claim-card-progress {
+    margin-top: 50px;
+}
+
+.claim-card-progress-description {
+    color: var(--text-secondary);
+    font-size: .8rem;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.claim-card-progress-dates {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.claim-card-progress-dates div {
+    color: var(--text-secondary);
+    font-size: .8rem;
+}
+
+.tokenomics-container,
+.future-container,
+.burn-stats-container {
+    margin-top: 50px;
+}
+
+.tokenomics-title {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 25px;
+    background: linear-gradient(to right, #e71ce4, #da0d5a, #7b2eff, #be2289, #e71ce4);
+    animation: moveBackground 4s linear infinite;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tokenomics-body,
+.future-body {
+    border-radius: 20px;
+    background: #07070c;
+    padding: 25px;
+}
+
+.future-body {
+    padding: 40px;
+}
+
+.tokenomics-link {
+    color: var(--accent);
+    cursor: pointer;
+    word-wrap: anywhere;
+}
+
+.future-title {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.burn-stats-container {
+    border-radius: 20px;
+    background: #07070c;
+    padding: 25px;
+    display: inline-block;
+    min-width: 500px;
+    margin-top: 50px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.burn-stats-head {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.burn-stats-item {
+    display: inline-block;
+}
+
+.burn-stats-items {
+    display: flex;
+    margin-top: 20px;
+    column-gap: 25px;
+    row-gap: 15px;
+    flex-wrap: wrap;
+    word-wrap: anywhere;
+}
+
+.burn-stats-item-title {
+    font-weight: 300;
+    color: var(--text-secondary);
+    font-size: .85rem;
+}
+
+.burn-stats-item-subtitle {
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 1.3rem;
+}
+
+@media screen and (max-width: 600px) {
+    .claim-card-container,
+    .burn-stats-container {
+        min-width: auto;
+        display: block;
+    }
+
+    .tokenomics-body,
+    .burn-stats-container {
+        padding: 20px;
+    }
+
+    .future-body {
+        padding: 20px 20px 20px 30px;
+    }
+}
+
+@keyframes moveBackground {
+    to {
+        background-position: 200% center;
+    }
+}

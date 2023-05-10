@@ -1,0 +1,122 @@
+.container {
+    height: var(--header-height);
+    background: var(--header-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons--button {
+    padding: 0 30px;
+    cursor: pointer;
+}
+
+.connected-wallet-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+.connected-wallet-bubble {
+    width: 35px;
+    height: 35px;
+    background: var(--connect-wallet-button-color);
+    border-radius: 100px;
+    background-color: var(--accent);
+    transform: translateZ(0px);
+    background-image: var(--connected-wallet-bubble-gradient);
+}
+
+.buttons--button--selected {
+    font-weight: bold;
+    color: var(--accent);
+    box-shadow: var(--accent-10) 0 0 10px 4px;
+    background: var(--accent-10);
+    padding: 3px 10px;
+    border-radius: 100px;
+}
+
+.connect-wallet-button {
+    padding: 10px 20px;
+    background: var(--connect-wallet-button-color);
+    animation: moveBackground 4s linear infinite;
+    background-size: 200% auto;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+}
+
+.connect-wallet-button:hover {
+    transform: scale(1.04);
+}
+
+.connect-wallet-button:active {
+    transform: scale(0.94);
+}
+
+.connected-wallet-button--connected {
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.menu-button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+.logo-text {
+    font-weight: bold;
+    margin-left: 12px;
+    font-size: 1.6rem;
+}
+
+@media screen and (min-width: 900px) {
+    .menu-button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .connect-wallet-button,
+    .connected-wallet-button-container,
+    .buttons-container {
+        display: none;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+
+@keyframes moveBackground {
+    to {
+        background-position: 200% center;
+    }
+}

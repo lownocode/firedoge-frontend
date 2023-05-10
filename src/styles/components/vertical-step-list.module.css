@@ -1,0 +1,32 @@
+.container {
+    list-style: none;
+    padding: 0;
+}
+
+.container li {
+    position: relative;
+    padding: 0 0 40px 30px;
+    border-left: 1px solid var(--accent);
+    font-weight: bold;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    left: -15px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+}
+
+.description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: block;
+    font-weight: 400;
+    margin-top: 5px;
+}
