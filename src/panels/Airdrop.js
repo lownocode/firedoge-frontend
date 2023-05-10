@@ -101,41 +101,43 @@ export const Airdrop = () => {
     }, [location])
 
     useEffect(() => {
-        if (
-            claimDataFetchingStatus === ClaimFetchingStatus.WAIT_ACCOUNT_CONNECTION
-            && account.address !== undefined
-        ) {
-            setClaimDataFetchingStatus(ClaimFetchingStatus.PENDING)
+        (() => {
+            if (!account.address) {
+                return setClaimDataFetchingStatus(ClaimFetchingStatus.WAIT_ACCOUNT_CONNECTION)
+            }
 
-            fetch(`${window.location.protocol + "//" + window.location.host}/signs/${account.address?.slice(0, 4).toLowerCase()}.json`)
-                .then(data => data.json())
-                .then(body => {
-                    const claimData = body[account.address]
+            if (claimDataFetchingStatus === ClaimFetchingStatus.WAIT_ACCOUNT_CONNECTION) {
+                setClaimDataFetchingStatus(ClaimFetchingStatus.PENDING)
 
-                    console.log(claimCallback)
+                fetch(`${window.location.protocol + "//" + window.location.host}/signs/${account.address?.slice(0, 4).toLowerCase()}.json`)
+                    .then(data => data.json())
+                    .then(body => {
+                        const claimData = body[account.address]
 
-                    if (claimData === undefined) {
-                        setClaimDataFetchingStatus(ClaimFetchingStatus.NOT_ELIGIBLE)
-                    } else {
-                        setClaimDataFetchingStatus(ClaimFetchingStatus.ELIGIBLE)
-                        setClaimData(body[account.address])
-                    }
-                })
-        }
-    }, [])
+                        console.log(claimCallback)
+
+                        if (claimData === undefined) {
+                            setClaimDataFetchingStatus(ClaimFetchingStatus.NOT_ELIGIBLE)
+                        } else {
+                            setClaimDataFetchingStatus(ClaimFetchingStatus.ELIGIBLE)
+                            setClaimData(body[account.address])
+                        }
+                    })
+            }
+        })()
+    }, [account])
 
     useEffect(() => {
         const newLabel = (() => {
             if (isClaimed) {
                 return "Claimed!"
-            } else if (claimDataFetchingStatus === ClaimFetchingStatus.PENDING) {
-                return "Check your eligibility..."
-            } else if (claimDataFetchingStatus === ClaimFetchingStatus.NOT_ELIGIBLE) {
-                return "Not eligible :("
-            } else if (claimDataFetchingStatus === ClaimFetchingStatus.ELIGIBLE) {
-                return "Claim!"
-            } else  if (claimDataFetchingStatus === ClaimFetchingStatus.WAIT_ACCOUNT_CONNECTION) {
-                return "Claim!"
+            }
+
+            switch (claimDataFetchingStatus) {
+                case ClaimFetchingStatus.PENDING: return "Check your eligibility..."
+                case ClaimFetchingStatus.NOT_ELIGIBLE: return "Not eligible :("
+                case ClaimFetchingStatus.ELIGIBLE:
+                case ClaimFetchingStatus.WAIT_ACCOUNT_CONNECTION: return "Claim!"
             }
         })()
 
