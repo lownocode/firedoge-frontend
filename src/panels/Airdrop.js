@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { ethers } from "ethers"
+import { BigNumber, ethers } from "ethers"
 import { useAccount, useBalance, useContractRead } from "wagmi"
 import { useSnackbar } from "react-simple-snackbar"
 import { useLocation } from "react-router-dom"
@@ -76,17 +76,17 @@ export const Airdrop = () => {
         address: config.burnAddress,
         token: config.contract,
     })
-    const totalDestroyedTokens = firstDestroyedTokens.data.value + secondDestroyedTokens.data.value
+    const totalDestroyedTokens = firstDestroyedTokens?.data?.value + secondDestroyedTokens?.data?.value
     const totalSupply = useContractRead({
         ...AirdropContract,
         functionName: "totalSupply"
     }).data
-    const totalBurnTokensPercentage = (100 * Number(totalDestroyedTokens)) / Number(totalSupply)
+    const totalBurnTokensPercentage = (100 * ethers.BigNumber.from(totalDestroyedTokens)) / ethers.BigNumber.from(totalSupply)
 
     const burnStatsItems = [
         {
             title: "Total FIREDOGE Destroyed",
-            subtitle: ethers.utils.commify(ethers.utils.formatUnits(totalDestroyedTokens, firstDestroyedTokens.data.decimals))
+            subtitle: ethers.utils.commify(ethers.utils.formatUnits(totalDestroyedTokens ?? ethers.BigNumber.from(0), firstDestroyedTokens?.data?.decimals ?? ethers.BigNumber.from(0)))
         },
         {
             title: "Amount of Burned FIREDOGE (%)",
